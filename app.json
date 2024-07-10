@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "video-sharing",
-    "slug": "video-sharing",
+    "name": "choco-pie",
+    "slug": "choco-pie",
+    "scheme": "choco-pie",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
