@@ -4,8 +4,15 @@ import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
 import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import { Redirect, router } from "expo-router";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
+  const { isLoading, isLogged } = useGlobalContext();
+
+  if (!isLoading && isLogged) {
+    return <Redirect href="/home" />;
+  }
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
