@@ -29,16 +29,15 @@ const SignIn = () => {
     }
     setIsSubmitting(true);
     try {
-      const result = await signIn(form.email, form.password);
-
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser();
+      console.log("==> " + JSON.stringify(result));
       //set global state
       setUser(result);
       setIsLoggedIn(true);
 
-      Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
     } catch (error) {
-      Alert.alert("Error", error.message);
       setIsLoggedIn(false);
     } finally {
       setIsSubmitting(false);

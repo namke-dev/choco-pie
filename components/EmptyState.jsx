@@ -1,11 +1,11 @@
 import { Image, Text, View } from "react-native";
 import React from "react";
 import { images } from "../constants";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "./CustomButton";
 
-const EmptySearchResult = ({ title, subtitle }) => {
+const EmptyState = ({ title, subtitle }) => {
   return (
-    <View>
+    <View className="flex-1 items-center">
       <Image
         source={images.empty}
         className="w-[270px] h-[125px]"
@@ -26,4 +26,4 @@ const EmptySearchResult = ({ title, subtitle }) => {
   );
 };
 
-export default EmptySearchResult;
+export default EmptyState;
