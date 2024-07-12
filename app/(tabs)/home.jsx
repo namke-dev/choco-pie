@@ -11,11 +11,14 @@ import React, { useState } from "react";
 import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
 import TrendingCard from "../../components/TrendingCard";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLastestPost } from "../../lib/appwrite";
 import useAppwrite from "../../lib/appwriteHook";
+import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { data: lastestPosts } = useAppwrite(getLastestPost);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -23,15 +26,13 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   };
-  console.log(posts);
+  // console.log(posts);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
-        keyExtractor={(item) => item.$id} // Use item.id here
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.title}</Text>
-        )}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
@@ -59,7 +60,7 @@ const Home = () => {
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 Lasted Videos
               </Text>
-              <TrendingCard posts={[{ id: 1 }, { id: 2 }, { id: 3 } ?? []]} />
+              <TrendingCard posts={lastestPosts ?? []} />
             </View>
           </View>
         )}
