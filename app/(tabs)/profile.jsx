@@ -2,25 +2,22 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
-import SearchInput from "../../components/SearchInput";
-import { getUserPost, searchPost, signOut } from "../../lib/appwrite";
+import React from "react";
+import { getUserPost, signOut } from "../../lib/appwrite";
 import useAppwrite from "../../lib/appwriteHook";
 import VideoCard from "../../components/VideoCard";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import EmptyState from "../../components/EmptyState";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { icons, images } from "../../constants";
+import { icons } from "../../constants";
 import InfoBox from "../../components/InfoBox";
 
 const Profile = () => {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  console.log("==> get user profile...\n" + JSON.stringify(user));
 
   const { data: posts } = useAppwrite(() => getUserPost(user.$id));
 
@@ -35,6 +32,9 @@ const Profile = () => {
       setIsLoggedIn(false);
     }
   };
+
+  console.log("==> get user profile...\n" + JSON.stringify(user.email));
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
